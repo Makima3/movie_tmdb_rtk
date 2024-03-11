@@ -6,6 +6,8 @@ const poster = 'https://image.tmdb.org/t/p/w300/'
 const movie = '/movie'
 const actors = '/movie'
 const search = '/search/movie'
+const tv = '/discover/tv'
+const genreT = '/genre/tv/list'
 
 const urls = {
     genre,
@@ -17,7 +19,9 @@ const urls = {
     },
     actors: {
         byId: (id: string) => `${actors}/${id}/credits`
-    }
+    },
+    tv,
+    genreT
 }
 
 export {
