@@ -1,1 +1,5 @@
 export * from './axiosService'
+export * from './actorsService'
+export * from './genreService'
+export * from './movieService'
+export * from './searchService'
