@@ -1,0 +1,38 @@
+.Header {
+    display: flex;
+    height: 101px;
+    background-image: conic-gradient(from 80deg at -3% 0%, rgba(255, 255, 255, 1) 0%, rgb(14, 165, 233) 50%, rgb(14, 165, 233) 100%);
+    font-size: 30px;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Header a {
+    text-decoration: none;
+    color: #070015;
+}
+
+.Header a[class='active'] {
+    color: darkred;
+}
+
+.Icon {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+}
+
+.Name {
+    margin: 30px 0 30px 10px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.Links {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 170px;
+}

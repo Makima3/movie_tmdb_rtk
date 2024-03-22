@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const InfoMovie = () => {
+export const Genres = () => {
     return (
         <div>
-
+            genres page
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Movie = () => {
+export const Movies = () => {
     return (
         <div>
-            movie
+            movies page
         </div>
     );
 };

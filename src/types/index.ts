@@ -1,2 +1,2 @@
 export * from './responseType'
-export * from './reduxtype'
+export * from './reduxType'
