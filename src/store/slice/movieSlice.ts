@@ -89,17 +89,12 @@ const getMovieByGenre = createAsyncThunk<IMovieInfo, { page: string, with_genres
     }
 )
 
-const getMoviesByKeyWord = createAsyncThunk<IMovieInfo, { page: string, query: string }>(
-    'moviesSlice/getMoviesByKeyWord',
-    async ({page, query}, {rejectWithValue}) => {
+const getByKeyword = createAsyncThunk<IMovieInfo, { keyword: string, page: string }>(
+    'movieSlice/getByKeyword',
+    async ({keyword, page}, {rejectWithValue}) => {
         try {
-            if (query === ':searchWord') {
-                const {data} = await movieService.getAll(page)
-                return data
-            } else {
-                const {data} = await searchService.getByKeyword(page, query)
-                return data
-            }
+            const {data} = await searchService.getByKeyword(keyword, page)
+            return data
         } catch (e) {
             const err = e as AxiosError
             return rejectWithValue(err.response.data)
@@ -140,13 +135,11 @@ const movieSlice = createSlice({
                 state.movieById = null;
                 state.errors = false;
             })
-            .addCase(getMoviesByKeyWord.fulfilled, (state, action) => {
-                const {total_pages, results} = action.payload;
-                state.movies = results;
-                state.total_pages = total_pages;
-                state.movieById = null;
-                state.errors = false;
+            .addCase(getByKeyword.fulfilled, (state, action) => {
+                const {results} = action.payload
+                state.movies = results
             })
+
 })
 
 export const {reducer: movieReducer, actions} = movieSlice
@@ -158,5 +151,5 @@ export const movieAction = {
     getActors,
     getAllGenres,
     getMovieByGenre,
-    getMoviesByKeyWord
+    getByKeyword
 }
