@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {IActors, ICast, IGenre, IGenres, IMovie, IMovieInfo} from "../../interfaces";
 import {IOneMovieInfo} from "../../interfaces/infoMovieInterfaces";
-import {actorsService, genreService, movieService} from "../../services";
+import {actorsService, genreService, movieService, searchService} from "../../services";
 import {AxiosError} from "axios";
 
 interface IState {
@@ -71,7 +71,38 @@ const getAllGenres = createAsyncThunk<IGenres, void>(
             return data
         } catch (e) {
             const err = e as AxiosError
-            return rejectWithValue(err.response?.data)
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getMovieByGenre = createAsyncThunk<IMovieInfo, { page: string, with_genres: string }>(
+    'moviesSlice/getMoviesByGenre',
+    async ({page, with_genres}, {rejectWithValue}) => {
+        try {
+            const {data} = await genreService.getMoviesByGenres(page, with_genres)
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getMoviesByKeyWord = createAsyncThunk<IMovieInfo, { page: string, query: string }>(
+    'moviesSlice/getMoviesByKeyWord',
+    async ({page, query}, {rejectWithValue}) => {
+        try {
+            if (query === ':searchWord') {
+                const {data} = await movieService.getAll(page)
+                return data
+            } else {
+                const {data} = await searchService.getByKeyword(page, query)
+                return data
+            }
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
         }
     }
 )
@@ -102,6 +133,20 @@ const movieSlice = createSlice({
             .addCase(getAllGenres.fulfilled, (state, action) => {
                 state.genres = action.payload.genres
             })
+            .addCase(getMovieByGenre.fulfilled, (state, action) => {
+                const {total_pages, results} = action.payload;
+                state.movies = results;
+                state.total_pages = total_pages;
+                state.movieById = null;
+                state.errors = false;
+            })
+            .addCase(getMoviesByKeyWord.fulfilled, (state, action) => {
+                const {total_pages, results} = action.payload;
+                state.movies = results;
+                state.total_pages = total_pages;
+                state.movieById = null;
+                state.errors = false;
+            })
 })
 
 export const {reducer: movieReducer, actions} = movieSlice
@@ -111,5 +156,7 @@ export const movieAction = {
     getAllMovies,
     getMovieById,
     getActors,
-    getAllGenres
+    getAllGenres,
+    getMovieByGenre,
+    getMoviesByKeyWord
 }
