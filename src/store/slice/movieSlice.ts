@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ICast, IGenre, IMovie, IMovieInfo} from "../../interfaces";
+import {IActors, ICast, IGenre, IGenres, IMovie, IMovieInfo} from "../../interfaces";
 import {IOneMovieInfo} from "../../interfaces/infoMovieInterfaces";
-import {movieService} from "../../services";
+import {actorsService, genreService, movieService} from "../../services";
 import {AxiosError} from "axios";
 
 interface IState {
@@ -37,11 +37,50 @@ const getAllMovies = createAsyncThunk<IMovieInfo, { page: string }>(
     }
 )
 
+const getMovieById = createAsyncThunk<IOneMovieInfo, { id: string }>(
+    'movieSlice/getMovieById',
+    async ({id}, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getById(id)
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getActors = createAsyncThunk<IActors, { id: string }>(
+    'movieSlice/getActors',
+    async ({id}, {rejectWithValue}) => {
+        try {
+            const {data} = await actorsService.getById(id)
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+const getAllGenres = createAsyncThunk<IGenres, void>(
+    'movieSlice/getGenres',
+    async (_, {rejectWithValue}) => {
+        try {
+            const {data} = await genreService.getAll()
+            return data
+        } catch (e) {
+            const err = e as AxiosError
+            return rejectWithValue(err.response?.data)
+        }
+    }
+)
+
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
-        setPage: (state, action)=>{
+        setPage: (state, action) => {
             state.page = action.payload.page
         }
     },
@@ -54,11 +93,23 @@ const movieSlice = createSlice({
                 state.movieById = null;
                 state.errors = false;
             })
+            .addCase(getMovieById.fulfilled, (state, action) => {
+                state.movieById = action.payload
+            })
+            .addCase(getActors.fulfilled, (state, action) => {
+                state.actors = action.payload.cast
+            })
+            .addCase(getAllGenres.fulfilled, (state, action) => {
+                state.genres = action.payload.genres
+            })
 })
 
 export const {reducer: movieReducer, actions} = movieSlice
 
 export const movieAction = {
     ...actions,
-    getAllMovies
+    getAllMovies,
+    getMovieById,
+    getActors,
+    getAllGenres
 }
