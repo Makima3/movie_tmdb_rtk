@@ -1,2 +1,5 @@
 export * from './HeaderComponent/Header'
 export * from './ActorsComponent/Actors'
+export * from './MovieComponent/AllMovies'
+export * from './MovieComponent/Movie'
+export * from './MovieComponent/PaginationMovies'
