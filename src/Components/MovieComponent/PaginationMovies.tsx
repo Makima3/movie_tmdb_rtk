@@ -26,9 +26,8 @@ export const PaginationMovies = () => {
             <Pagination onChange={change}
                         page={+page}
                         count={total_pages}
-                        color="standard"
+                        color="primary"
                         size="large"
-                        variant="outlined"
                         shape="rounded"
                         boundaryCount={2}
             />

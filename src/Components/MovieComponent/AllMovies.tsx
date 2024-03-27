@@ -1,21 +1,25 @@
 import React, {FC} from 'react';
+
 import {IMovie} from "../../interfaces";
 import {Movie} from "./Movie";
 import {PaginationMovies} from "./PaginationMovies";
+import css from './Movies.module.css'
 
 
-interface IProps{
+interface IProps {
     movies: IMovie[]
 }
 
 export const AllMovies: FC<IProps> = ({movies}) => {
     return (
-        <div>
+        <>
+        <div className={css.Cards}>
             {
                 movies.map(movie => <Movie key={movie.id} movie={movie}/>)
             }
-            <PaginationMovies/>
         </div>
+            <div className={css.Pagination}><PaginationMovies/></div>
+        </>
     );
 };
 
