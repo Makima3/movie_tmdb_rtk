@@ -6,20 +6,21 @@ import {movieAction} from "../../store";
 import {useAppDispatch} from "../../hooks";
 import {useNavigate} from "react-router-dom";
 
-interface IProps{
+interface IProps {
     genre: IGenre
 }
-export const Genre:FC<IProps> = ({genre}) => {
+
+export const Genre: FC<IProps> = ({genre}) => {
     const {id, name} = genre;
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
-    const chosenGenre = ()=>{
-        dispatch(movieAction.setPage({page:'1'}))
+    const chosenGenre = () => {
+        dispatch(movieAction.setPage({page: '1'}))
         navigate(`${id}`)
     }
     return (
         <div onClick={chosenGenre} className={css.Genre}>
-            <h3>{name}</h3>
+            <h1>{name}</h1>
         </div>
     );
 };

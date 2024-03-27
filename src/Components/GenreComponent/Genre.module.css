@@ -1,5 +1,37 @@
 .Genre {
-    width: 300px;
-    height: 60px;
-    border: 1px solid black;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    height: 90px;
+    border: solid 1px black;
+    gap: 30px;
+}
+
+.Genre {
+    padding: 10px 20px;
+    border: none;
+    color: #fff;
+    border-radius: 7px;
+    transition: 0.5s;
+    transition-property: box-shadow;
+}
+
+.Genre {
+    background: rgba(71, 164, 245, 0.84);
+    box-shadow: 0 0 20px rgb(125, 188, 241);
+}
+
+.Genre:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(89, 160, 244),
+    0 0 25px rgb(89, 160, 244),
+    0 0 45px rgb(89, 160, 244),
+    0 0 90px rgb(89, 160, 244);
+}
+.BlockGenre{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 40px 0 0 100px;
 }

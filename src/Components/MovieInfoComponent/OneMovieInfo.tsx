@@ -26,14 +26,12 @@ export const OneMovieInfo = () => {
     return (
         <>
             <div className={css.GeneralBlock}>
-
                 <div className={css.FirstBlock}>
                     <div>
                         {poster_path ? <img className={css.Poster} src={`${urls.poster}/${poster_path}`} alt={title}/> :
-                            <img className={css.Poster}src={noPoster} alt={title}/>}
+                            <img className={css.Poster} src={noPoster} alt={title}/>}
                     </div>
                 </div>
-
                 <div className={css.SecondBlock}>
                     <div>
                         <h1>{title}</h1>
@@ -48,8 +46,11 @@ export const OneMovieInfo = () => {
                             />
                             <div>{vote_average}</div>
                         </div>
-                        <div className={css.Genres}>{genres.map(genre => <GenresForMovie key={genre.id}
-                                                                                         genre={genre}/>)}</div>
+                        <div className={css.Genres}>
+                            {
+                                genres.map(genre => <GenresForMovie key={genre.id} genre={genre}/>)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,7 +61,6 @@ export const OneMovieInfo = () => {
                 }
             </div>
         </>
-
     );
 };
 
