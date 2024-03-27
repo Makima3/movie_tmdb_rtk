@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
+
 import {Searching} from "./Searching";
+import css from './Search.module.css'
 
 
 export const SearchForm = () => {
@@ -14,10 +16,12 @@ export const SearchForm = () => {
     };
     return (
         <>
+            <div className={css.GeneralInput}>
         <form onSubmit={handleSubmit(search)}>
-            <input type='text' placeholder='Search...' {...register('keyword')} />
-            <button>Search movie</button>
+            <input className={css.Input} type='text' placeholder='Search...' {...register('keyword')} />
+            <button className={css.Button}>Search movie</button>
         </form>
+            </div>
             <Searching keyword={keyword}/>
         </>
     );

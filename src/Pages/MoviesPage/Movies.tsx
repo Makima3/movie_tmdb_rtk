@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks";
 import {useSearchParams} from "react-router-dom";
+
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieAction} from "../../store";
 import {AllMovies} from "../../Components";
 

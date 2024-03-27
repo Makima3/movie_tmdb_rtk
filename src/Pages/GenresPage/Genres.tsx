@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+
 import {movieAction} from "../../store";
 import {useAppDispatch} from "../../hooks";
 import {GenresMovies} from "../../Components";

@@ -1,7 +1,8 @@
 import React, {FC, useEffect} from 'react';
+import {useSearchParams} from "react-router-dom";
+
 import {movieAction} from "../../store";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {useSearchParams} from "react-router-dom";
 import {AllMovies} from "../MovieComponent/AllMovies";
 
 interface IProps {
