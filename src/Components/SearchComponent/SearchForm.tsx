@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {useForm} from "react-hook-form";
-import {IKeyword} from "../../interfaces";
+import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {Searching} from "./Searching";
 
 
 export const SearchForm = () => {
 
     const {handleSubmit, reset, register} = useForm()
-    const [word, setWord] = useState<string>()
+    const [keyword, setKeyword] = useState<string>()
 
-    const search = (query: IKeyword) => {
-        setWord(query.keyword)
+    const search: SubmitHandler<FieldValues> = (query) => {
+        setKeyword(query.keyword)
         reset()
     };
     return (
@@ -19,7 +18,7 @@ export const SearchForm = () => {
             <input type='text' placeholder='Search...' {...register('keyword')} />
             <button>Search movie</button>
         </form>
-            <Searching word={word}/>
+            <Searching keyword={keyword}/>
         </>
     );
 };

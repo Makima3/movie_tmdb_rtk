@@ -5,23 +5,23 @@ import {useSearchParams} from "react-router-dom";
 import {AllMovies} from "../MovieComponent/AllMovies";
 
 interface IProps {
-    word: string
+    keyword: string
 }
 
-export const Searching: FC<IProps> = ({word}) => {
-    const [query, setQuery] = useSearchParams({page: '1'});
+export const Searching: FC<IProps> = ({keyword}) => {
+    const [query] = useSearchParams({page: '1'});
     const page = query.get('page');
     const {movies} = useAppSelector(state => state.movie);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        word
+        keyword
             ?
-            dispatch(movieAction.getByKeyword({word, page}))
+            dispatch(movieAction.getByKeyword({keyword, page}))
             :
             dispatch(movieAction.getAllMovies({page}))
 
-    }, [word, page, dispatch]);
+    }, [keyword, page, dispatch]);
 
     return (
         <div>
