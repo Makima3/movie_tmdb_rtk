@@ -1,10 +1,12 @@
 import React from 'react';
 import {useAppSelector} from "../../hooks";
+
 import {Rating} from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import {noPoster, urls} from "../../const";
 import {Actors} from "../ActorsComponent/Actors";
 import {GenresForMovie} from "./GenresForMovie";
+import css from './MovieInfo.module.css'
 
 export const OneMovieInfo = () => {
 
@@ -49,7 +51,7 @@ export const OneMovieInfo = () => {
                 />
             </div>
 
-            <div>
+            <div className={css.Actors}>
                 {
                     actors.map(actor => <Actors key={actor.id} actor={actor}/>)
                 }
