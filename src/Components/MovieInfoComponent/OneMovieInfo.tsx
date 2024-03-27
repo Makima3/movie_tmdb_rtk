@@ -24,39 +24,43 @@ export const OneMovieInfo = () => {
     } = movieById
 
     return (
-        <div>
-            <div><h1>{title}</h1></div>
+        <>
+            <div className={css.GeneralBlock}>
 
-            <div>{poster_path ? <img src={`${urls.poster}/${poster_path}`} alt={title}/> :
-                <img src={noPoster} alt={title}/>}
+                <div className={css.FirstBlock}>
+                    <div>
+                        {poster_path ? <img className={css.Poster} src={`${urls.poster}/${poster_path}`} alt={title}/> :
+                            <img className={css.Poster}src={noPoster} alt={title}/>}
+                    </div>
+                </div>
+
+                <div className={css.SecondBlock}>
+                    <div>
+                        <h1>{title}</h1>
+                        <p><b>Release date: </b> {release_date}</p>
+                        <p><b>Runtime: </b>{runtime} min</p>
+                        <p><b>Budget: </b>{budget}$</p>
+                        <p><b>Original language: </b>{original_language}</p>
+                        <p><b>Overview: </b>{overview}</p>
+                        <div className={css.Rait}>
+                            <Rating name="half-rating-read" value={vote_average} max={10}
+                                    emptyIcon={<StarIcon style={{opacity: 0.5, color: 'gray'}}/>}
+                            />
+                            <div>{vote_average}</div>
+                        </div>
+                        <div className={css.Genres}>{genres.map(genre => <GenresForMovie key={genre.id}
+                                                                                         genre={genre}/>)}</div>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <div><b>Release date: </b> {release_date}</div>
-                <div><b>Runtime: </b>{runtime} min</div>
-                <div><b>Budget: </b>{budget}$</div>
-                <div><b>Original language: </b>{original_language}</div>
-                <div><b> Overview:</b>{overview}</div>
-            </div>
-
-            <div>
-                {
-                    genres.map(genre => <GenresForMovie key={genre.id} genre={genre}/>)
-                }
-            </div>
-
-            <div>
-                <Rating name="half-rating-read" value={vote_average} max={10}
-                        emptyIcon={<StarIcon style={{opacity: 0.5, color: 'gray'}}/>}
-                />
-            </div>
-
+            <div className={css.Title}><h1>Main cast</h1></div>
             <div className={css.Actors}>
                 {
                     actors.map(actor => <Actors key={actor.id} actor={actor}/>)
                 }
             </div>
-        </div>
+        </>
+
     );
 };
 

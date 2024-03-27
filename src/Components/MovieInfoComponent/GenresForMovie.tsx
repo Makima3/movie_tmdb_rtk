@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
+
 import {IGenre} from "../../interfaces";
+import css from './MovieInfo.module.css'
 
 interface IProps{
     genre:IGenre
@@ -8,8 +10,8 @@ interface IProps{
 export const GenresForMovie: FC<IProps> = ({genre}) => {
 
     return (
-        <div>
-            Genre: {genre.name}
+        <div className={css.Genre}>
+            {genre.name}
         </div>
     );
 };
